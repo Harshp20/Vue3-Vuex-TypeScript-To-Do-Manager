@@ -10,15 +10,15 @@
     <button
       @click="$store.dispatch('addToDo')"
       :class="
-        $store.state.toDoBeingEdited === null
+        $store.state.toDoBeingEdited === -1
           ? 'todo-btn add-btn'
           : 'todo-btn update-btn'
       "
     >
-      {{ $store.state.toDoBeingEdited === null ? "Add" : "Update" }}
+      {{ $store.state.toDoBeingEdited === -1 ? "Add" : "Update" }}
     </button>
     <button
-      v-if="$store.state.toDoBeingEdited !== null"
+      v-if="$store.state.toDoBeingEdited !== -1"
       @click="$store.dispatch('cancelToDoEdit')"
       class="todo-btn delete-btn"
     >
@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import "../styles.css";
-
 export default {
   name: "AddToDo",
   computed: {

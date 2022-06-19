@@ -4,7 +4,6 @@
 
 <script>
 import ToDo from "./ToDo.vue";
-import '../styles.css'
 
 export default {
   name: "ToDoList",

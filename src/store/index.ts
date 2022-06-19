@@ -1,32 +1,32 @@
 import { createStore } from "vuex";
 
-// interface State {
-//   toDoBeingEdited: undefined | string;
-//   heading: string;
-//   toDo: string;
-//   toggleUpdateBtn: boolean;
-//   toDos: [
-//     {
-//       name: string;
-//       status: string;
-//     }
-//   ];
-// }
+interface State {
+  toDoBeingEdited: number;
+  heading: string;
+  toDo: string;
+  toDos: [
+    {
+      name: string;
+      status: string;
+    }
+  ];
+  errorText: string;
+  showErrorText: boolean;
+}
 
 export default createStore({
   state: {
-    toDoBeingEdited: null,
+    toDoBeingEdited: -1,
     heading: "Your To-Do List",
     toDo: "",
-    toggleUpdateBtn: false,
     toDos: [
       {
         name: "Feed the Cat",
         status: "Pending",
       },
     ],
-    errorText: 'Item already exists',
-    showErrorText: false
+    errorText: "Item already exists",
+    showErrorText: false,
   },
   getters: {},
   mutations: {
@@ -35,37 +35,37 @@ export default createStore({
     },
     editToDo(state, index) {
       state.toDoBeingEdited = index;
-      state.toDo = state.toDos[state.toDoBeingEdited as any].name; // Fix this type casting
+      state.toDo = state.toDos[state.toDoBeingEdited].name; // Fix this type casting
     },
     addToDo(state) {
       state.toDos.push({
         name: state.toDo,
         status: "Pending",
       });
-      state.toDo = ''
+      state.toDo = "";
     },
     setToDoName(state, toDoName) {
       state.toDo = toDoName.trim();
     },
     updateToDo(state) {
       state.toDos[state.toDoBeingEdited as any].name = state.toDo; // Fix this type casting
-      state.toDoBeingEdited = null
-      state.toDo = ''
+      state.toDoBeingEdited = -1;
+      state.toDo = "";
     },
     cancelToDoEdit(state) {
-      state.toDoBeingEdited = null
-      state.toDo = ''
+      state.toDoBeingEdited = -1;
+      state.toDo = "";
     },
     toggleErrorText(state) {
-      state.showErrorText = true
+      state.showErrorText = true;
       setTimeout(() => {
-        state.showErrorText = false
-      }, 1300)
-    }
+        state.showErrorText = false;
+      }, 1300);
+    },
   },
   actions: {
     deleteToDo({ state, commit }, index) {
-      if (state.toDoBeingEdited === index) commit('cancelToDoEdit');
+      if (state.toDoBeingEdited === index) commit("cancelToDoEdit");
       commit("deleteToDo", index);
     },
     editToDo({ commit }, index) {
@@ -74,12 +74,16 @@ export default createStore({
     addToDo({ state, commit }) {
       if (!state.toDo.length) return;
 
-      if (state.toDos.find(x => x.name.toLocaleLowerCase() === state.toDo.toLocaleLowerCase()) !== undefined) {
-        commit('toggleErrorText')
-        return
-      };
+      if (
+        state.toDos.find(
+          (x) => x.name.toLocaleLowerCase() === state.toDo.toLocaleLowerCase()
+        ) !== undefined
+      ) {
+        commit("toggleErrorText");
+        return;
+      }
 
-      if (state.toDoBeingEdited === null) {
+      if (state.toDoBeingEdited === -1) {
         commit("addToDo");
       } else {
         commit("updateToDo");
@@ -89,7 +93,7 @@ export default createStore({
       commit("setToDoName", toDoName);
     },
     cancelToDoEdit({ commit }) {
-      commit('cancelToDoEdit')
-    }
+      commit("cancelToDoEdit");
+    },
   },
 });

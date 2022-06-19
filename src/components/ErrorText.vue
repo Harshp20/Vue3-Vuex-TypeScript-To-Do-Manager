@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import '../styles.css'
 export default {
     name: 'ErrorText'
 };

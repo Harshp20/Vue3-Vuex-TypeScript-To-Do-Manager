@@ -14,7 +14,6 @@
 import AddToDo from "./AddToDo.vue";
 import ToDoList from "./ToDoList.vue";
 import ErrorText from "./ErrorText.vue";
-import "../styles.css";
 
 export default {
   name: "ToDos",
