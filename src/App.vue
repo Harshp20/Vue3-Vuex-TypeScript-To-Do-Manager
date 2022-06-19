@@ -2,13 +2,14 @@
   <ToDos />
 </template>
 
-<script>
+<script lang='ts'>
+import { defineComponent } from "vue";
 import ToDos from "./components/ToDos.vue";
 
-export default {
+export default defineComponent({
   name: "App",
   components: {
     ToDos,
   },
-};
+});
 </script>

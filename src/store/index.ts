@@ -1,19 +1,33 @@
 import { createStore } from "vuex";
 
-interface State {
-  toDoBeingEdited: number;
-  heading: string;
-  toDo: string;
-  toDos: [
-    {
-      name: string;
-      status: string;
-    }
-  ];
-  errorText: string;
-  showErrorText: boolean;
-}
+// interface State {
+//   toDoBeingEdited: number;
+//   heading: string;
+//   toDo: string;
+//   toDos: [
+//     {
+//       name: string;
+//       status: string;
+//     }
+//   ];
+//   errorText: string;
+//   showErrorText: boolean;
+// }
 
+// interface Mutations {
+//   deleteToDo: (state: State, index: number) => void,
+//   editToDo: (state: State, index: number) => void,
+//   addToDo: (state: State) => void,
+//   setToDoName: (state: State, toDoName: string) => void,
+//   updateToDo: (state: State) => void,
+//   cancelToDoEdit: (state: State) => void,
+//   toggleErrorText: (state: State) => void,
+// }
+
+// interface Store {
+//   state: State,
+//   mutations: Mutations
+// }
 export default createStore({
   state: {
     toDoBeingEdited: -1,
